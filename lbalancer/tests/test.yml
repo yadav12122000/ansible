@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  roles:
+    - lbalancer
+- hosts: webserver
+  roles: 
+    - awsweb
