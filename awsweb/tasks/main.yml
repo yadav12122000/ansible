@@ -1,0 +1,21 @@
+---
+# tasks file for awsweb
+- name: Install the package
+  package:
+          name: httpd
+          state: present
+- name: Copy the webpages  
+  copy:
+          content: "this is from {{ ansible_default_ipv4.address }}"
+          dest: "/var/www/html/index.html"
+- name: start the service
+  service:
+          name: httpd
+          state: started
+- name: firewall service management
+  firewalld:
+          port: "80/tcp"
+          state: enabled
+          permanent: yes
+          immediate: yes
+
