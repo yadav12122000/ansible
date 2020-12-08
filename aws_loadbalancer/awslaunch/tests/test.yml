@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  roles:
+    - awslaunch
+- hosts: tag_Name_webserver
+  roles:
+    - awsweb

@@ -1,0 +1,10 @@
+---
+# vars file for awslaunch
+mykey: "firstkey"
+myinstance_type: "t2.micro"
+myimage: "ami-0e306788ff2473ccb"
+myvpc_subnet_id: "subnet-e8c2cb80"
+myregion: "ap-south-1"
+mygroup_id: "sg-058e4e10cc32df01f"
+myaccesskey: "xxxxxxxxxxxxxxxx"
+mysecretkey: "xxxxxxxxxxxxxxxxxxxxxxxxx"

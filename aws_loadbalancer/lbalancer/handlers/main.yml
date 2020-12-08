@@ -1,0 +1,6 @@
+---
+# handlers file for lbalancer
+- name: restart lb
+  service: 
+     name: "haproxy"
+     state: restarted

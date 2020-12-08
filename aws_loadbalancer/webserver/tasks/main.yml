@@ -1,0 +1,15 @@
+---
+# tasks file for awsweb
+- name: Install the package
+  package:
+          name: httpd
+          state: present
+- name: Copy the webpages  
+  copy:
+          content: "this is {{ ansible_hostname }}"
+          dest: "/var/www/html/index.html"
+- name: start the service
+  service:
+          name: httpd
+          state: started
+

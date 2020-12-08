@@ -1,0 +1,48 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+       - tag_name: "lb"
+  vars_prompt:
+        - name: num
+          prompt: "Enter the no of instance for loadbalancer"
+          private: no 
+      
+  tasks:
+      - name: launch instances for loadbalancer 
+        include_role:
+                name: awslaunch
+        register: lb
+      - debug: 
+           var: lb
+  
+- hosts: localhost
+  gather_facts: no
+  vars:
+        - tag_name: "web"
+  vars_prompt:
+        - name: num
+          prompt: "Enter the no of instance for webserver"
+          private: no 
+  tasks:   
+      - name: launch instances for webserver
+        include_role:
+                name: awslaunch
+        register: web
+      - debug: 
+           var: web
+       
+      - meta: refresh_inventory
+      - pause:
+             seconds: 60 
+
+- hosts: tag_Name_web
+  tasks: 
+    - name: configure webserver
+      include_role:
+              name: awsweb
+- hosts: tag_Name_lb
+  tasks:
+      - name: configure lb
+        include_role:
+                name: lbalancer
+  
