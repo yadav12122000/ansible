@@ -1,0 +1,62 @@
+- hosts: localhost
+  vars:
+    num: 1
+    tag_name: namenode
+  tasks:
+  - name: launching namenode
+    include_role:
+     name: awslaunch
+ 
+- hosts: localhost
+  vars:
+     tag_name: datanode
+  vars_prompt:
+    - name: num
+      prompt: "Enter the no of slave nodes"
+      private: no
+  tasks: 
+  - name: launch datanode
+    include_role:
+     name: awslaunch
+    register: launch_datanode
+  - debug:
+     var: launch_datanode
+
+  - meta: refresh_inventory
+  - pause:
+         seconds: 60
+
+
+- hosts: tag_Name_namenode
+  gather_facts: no
+  vars:
+    node_name: namenode
+    direc_name: /home/ec2-user/nn
+  tasks:
+  - name: configuring namenode
+    include_role:
+      name: hadoop
+    register: conf_namenode
+  - debug: 
+     var: conf_namenode
+
+- hosts: tag_Name_datanode
+  gather_facts: no
+  vars:
+    node_name: datanode
+    direc_name: /home/ec2-user/nn
+  tasks:
+  - name: configuring datanode
+    include_role:
+      name: hadoop
+    register: confi_datanode
+  - debug:
+      var: confi_datanode
+  
+
+
+
+
+
+
+
