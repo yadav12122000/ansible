@@ -1,7 +1,7 @@
-Role Name
+auto_var
 =========
 
-A brief description of the role goes here.
+it will dynamically pick the var file for amazon linux and ubuntu operating system.
 
 Requirements
 ------------
