@@ -1,0 +1,17 @@
+---
+# tasks file for when_task
+- include_vars: "{{ ansible_distribution }}.yml"
+- name: install httpd software
+  package:
+          name: "{{p_name}}"
+          state: present
+
+- name: copy the page
+  template:
+          src: "{{ansible_distribution}}.yml"
+          dest: /var/www/html/index.html
+
+- name: start service
+  service:
+          name: "{{s_name}}"
+          state: started 
